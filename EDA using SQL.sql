@@ -62,3 +62,10 @@ where order_date between '1/1/2018' and '12/31/2018'
 group by FORMAT(order_date,'MMMM') , FORMAT(order_date,'MM')
 order by [Month No.] asc
 
+-- TOTAL REVENUE BY MONTH & YEAR :
+select  FORMAT(order_date,'yyyy') as [Year] , FORMAT(order_date,'MMMM') as [Month Name] , FORMAT(order_date,'MM') as [Month No.] , sum(list_price*quantity*(1-discount)) as Revenue
+from sales.orders O join sales.order_items OI
+on o.order_id = OI.order_id
+group by FORMAT(order_date,'MMMM') , FORMAT(order_date,'MM') , FORMAT(order_date,'yyyy')
+order by [Year] , [Month No.]
+
