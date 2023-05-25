@@ -16,8 +16,9 @@ select staff_id , store_id , first_name , last_name from sales.staffs
 
 select product_id , product_name , brand_id , category_id from production.products
 
+-- CHECK THE SALES DATA OF MAY 2018 :
 select * from sales.orders
-where order_date between '04-01-2018' and '06-30-2018'
+where order_date between '04-01-2018' and '01-06-2018'
 --------------------------------------------------------------------------------------
 -- 2nd way :
 
