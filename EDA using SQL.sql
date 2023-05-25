@@ -19,6 +19,14 @@ on o.order_id = OI.order_id
 group by store_name
 order by Revenue desc
 
+-- TOTAL REVENUE BY BRAND :
+select brand_name , sum(oi.list_price*quantity*(1-discount)) as Revenue from sales.order_items OI join sales.orders O
+on o.order_id = oi.order_id join production.products P
+on p.product_id = oi.product_id join production.brands B
+on b.brand_id = p.brand_id
+group by brand_name
+order by Revenue desc
+
 -- TOTAL REVENUE BY CATEGORY & STATE :
 select  state , category_name , sum(OI.list_price*quantity*(1-discount)) as Revenue from production.categories C join production.products P
 on c.category_id = p.category_id join sales.order_items OI
