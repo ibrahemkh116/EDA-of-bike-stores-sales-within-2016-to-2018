@@ -1,5 +1,5 @@
 -- 1st way : GET OUT WITH VARIOUS TABLES (NEEDED COLUMNS) TO POWER BI BY CREATING SEPERATED QUERIES
-             BUT WE WILL NEED TO DO DATA MODELING IN MODEL VIEW IN POWER BI :
+          -- BUT WE WILL NEED TO DO DATA MODELING IN MODEL VIEW IN POWER BI :
 
 select customer_id , first_name , last_name , city , state from sales.customers
 
@@ -22,7 +22,7 @@ select * from sales.orders
 where order_date between '04-01-2018' and '01-06-2018'
 --------------------------------------------------------------------------------------
 -- 2nd way : GET OUT WITH ONE TABLE CONSISTS OF ALL CLOUMNS I NEED FOR REPORTING
-             BY ONE QUERY FULL OF JOINS AND WE WILL NOT NEED TO MAKE DATA MODELING IN POWER BI :
+          -- BY ONE QUERY FULL OF JOINS AND WE WILL NOT NEED TO MAKE DATA MODELING IN POWER BI :
 
 select brand_name , product_name , category_name , OI.list_price*quantity*(1-discount) as [Revenue] , order_date , CONCAT(CUS.first_name,' ',CUS.last_name) as [Customer Name] , CUS.city , CUS.state , store_name , CONCAT(STT.first_name,' ',STT.last_name) as [Staff Name] 
 from production.brands B join production.products P
