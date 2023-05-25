@@ -19,6 +19,15 @@ on o.order_id = OI.order_id
 group by store_name
 order by Revenue desc
 
+-- TOTAL REVENUE BY CATEGORY & STATE :
+select  state , category_name , sum(OI.list_price*quantity*(1-discount)) as Revenue from production.categories C join production.products P
+on c.category_id = p.category_id join sales.order_items OI
+on p.product_id = OI.product_id join sales.customers  CUS
+on CUS.customer_id = OI.order_id join sales.orders O
+on o.order_id = OI.order_id
+group by category_name , state
+order by state , Revenue desc
+
 -- TOTAL REVENUE BY Year :
 select FORMAT(order_date,'yyyy') as [Year] , sum(list_price*quantity*(1-discount)) as Revenue from sales.orders o join sales.order_items OI
 on o.order_id = OI.order_id
