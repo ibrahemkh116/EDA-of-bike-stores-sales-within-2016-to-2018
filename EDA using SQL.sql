@@ -19,7 +19,29 @@ on o.order_id = OI.order_id
 group by store_name
 order by Revenue desc
 
--- TOTAL REVENUE BY MONTH :
-select FORMAT(order_date,'MMMM') as [Month Name] , sum(list_price*quantity*(1-discount)) as Revenue from sales.orders O join sales.order_items OI
+-- TOTAL REVENUE BY Year :
+select FORMAT(order_date,'yyyy') as [Year] , sum(list_price*quantity*(1-discount)) as Revenue from sales.orders o join sales.order_items OI
 on o.order_id = OI.order_id
-group by FORMAT(order_date,'MMMM')
+group by FORMAT(order_date,'yyyy')
+
+-- TOTAL REVENUE BY MONTH in 2016:
+select FORMAT(order_date,'MMMM') as [Month Name] , FORMAT(order_date,'MM') as [Month No.] , sum(list_price*quantity*(1-discount)) as Revenue from sales.orders O join sales.order_items OI
+on o.order_id = OI.order_id
+where order_date between '1/1/2016' and '12/31/2016'
+group by FORMAT(order_date,'MMMM') , FORMAT(order_date,'MM')
+order by [Month No.] asc
+
+-- TOTAL REVENUE BY MONTH in 2017:
+select FORMAT(order_date,'MMMM') as [Month Name] , FORMAT(order_date,'MM') as [Month No.] , sum(list_price*quantity*(1-discount)) as Revenue from sales.orders O join sales.order_items OI
+on o.order_id = OI.order_id
+where order_date between '1/1/2017' and '12/31/2017'
+group by FORMAT(order_date,'MMMM') , FORMAT(order_date,'MM')
+order by [Month No.] asc
+
+-- TOTAL REVENUE BY MONTH in 2018:
+select FORMAT(order_date,'MMMM') as [Month Name] , FORMAT(order_date,'MM') as [Month No.] , sum(list_price*quantity*(1-discount)) as Revenue from sales.orders O join sales.order_items OI
+on o.order_id = OI.order_id
+where order_date between '1/1/2018' and '12/31/2018'
+group by FORMAT(order_date,'MMMM') , FORMAT(order_date,'MM')
+order by [Month No.] asc
+
