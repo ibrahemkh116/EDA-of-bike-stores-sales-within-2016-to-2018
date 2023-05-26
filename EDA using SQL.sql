@@ -41,6 +41,14 @@ select FORMAT(order_date,'yyyy') as [Year] , sum(list_price*quantity*(1-discount
 on o.order_id = OI.order_id
 group by FORMAT(order_date,'yyyy')
 
+-- TOTAL REVENUE BY Year (Another Query)  :
+with table1 as (
+select format(order_date,'yyyy') as [date] , list_price*quantity*(1-discount) as Revenue from sales.orders o join sales.order_items OI
+on o.order_id = OI.order_id
+)
+select [date] , SUM(revenue) as REV from table1
+group by [date]
+
 -- TOTAL REVENUE BY MONTH in 2016:
 select FORMAT(order_date,'MMMM') as [Month Name] , FORMAT(order_date,'MM') as [Month No.] , sum(list_price*quantity*(1-discount)) as Revenue from sales.orders O join sales.order_items OI
 on o.order_id = OI.order_id
@@ -67,5 +75,14 @@ select  FORMAT(order_date,'yyyy') as [Year] , FORMAT(order_date,'MMMM') as [Mont
 from sales.orders O join sales.order_items OI
 on o.order_id = OI.order_id
 group by FORMAT(order_date,'MMMM') , FORMAT(order_date,'MM') , FORMAT(order_date,'yyyy')
+order by [Year] , [Month No.]
+
+-- TOTAL REVENUE BY MONTH & YEAR (Another Query) :
+with table1 as (
+select FORMAT(o.order_date,'yyyy') as [Year] , format(o.order_date,'MMM') as [Month] , FORMAT(o.order_date ,'MM') as [Month No.] , oi.list_price*quantity*(1-discount) as [REV] from sales.orders O join sales.order_items OI
+on o.order_id = OI.order_id 
+)
+select [Year] , [month] , SUM([REV]) as [Revenue] from table1
+group by [Month] , [Month No.] ,[Year]
 order by [Year] , [Month No.]
 
